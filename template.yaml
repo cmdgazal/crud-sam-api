@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A simple crud application using aws lamda
+
+Globals:
+    Function:
+        Timeout: 200
+
+Resources:
+  Products:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Events:
+        CreateProduct:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: post
+        ListProducts:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: get
+        UpdateProduct:
+          Type: Api
+          Properties:
+            Path: /products/{productid}
+            Method: put
+        GetProduct:
+          Type: Api
+          Properties:
+            Path: /products/{productid}
+            Method: get
+        DeleteProduct:
+          Type: Api
+          Properties:
+            Path: /products/{productid}
+            Method: delete
